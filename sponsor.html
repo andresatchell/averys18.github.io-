@@ -1,0 +1,563 @@
+<style>
+  :root{
+    --paper:#F5F5F1;
+    --paper-dim:#E7E8E4;
+    --ink:#0F1E3C;
+    --crimson:#C8102E;
+    --crimson-dark:#94081F;
+    --clay:#46587A;
+    --gold:#FF6B7A;
+    --rule:#C7CBD4;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Source Serif 4', Georgia, serif;
+  }
+  .display{font-family:'Oswald', sans-serif; text-transform:uppercase; letter-spacing:0.02em;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px;}
+
+  /* ---- Header rule ---- */
+  .topline{
+    border-bottom:2px solid var(--ink);
+    background:var(--paper);
+  }
+  .topline .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:14px; padding-bottom:14px;
+  }
+  .brandmark{display:flex; align-items:baseline; gap:10px; position:relative; padding-left:2px;}
+  .brandmark .sig-mini{
+    position:absolute;
+    left:-6px; top:50%;
+    transform:translateY(-50%);
+    height:70px; width:auto;
+    opacity:0.14;
+    pointer-events:none;
+    z-index:0;
+  }
+  .brandmark .num{position:relative; z-index:1; font-family:'Oswald',sans-serif; font-weight:700; font-size:22px; color:var(--crimson);}
+  .brandmark .name{position:relative; z-index:1; font-family:'Oswald',sans-serif; font-weight:600; letter-spacing:0.08em; font-size:15px;}
+  .toplinks{display:flex; gap:22px; font-family:'Oswald',sans-serif; font-size:12.5px; letter-spacing:0.08em;}
+  .toplinks a{color:var(--ink); text-decoration:none; border-bottom:1px solid transparent;}
+  .toplinks a:hover{border-bottom-color:var(--crimson); color:var(--crimson);}
+  @media (max-width:640px){ .toplinks{display:none;} }
+
+  /* ---- Hero ---- */
+  .hero{position:relative; background:var(--ink); overflow:hidden;}
+  .hero-grid{
+    display:grid; grid-template-columns: 1.05fr 1fr; align-items:stretch;
+  }
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
+  .hero-photo{
+    position:relative;
+    min-height:460px;
+  }
+  .hero-photo img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .hero-copy{
+    color:var(--paper);
+    padding:56px 44px;
+    display:flex; flex-direction:column; justify-content:center;
+    position:relative;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.18em;
+    text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:8px; margin-bottom:18px;
+  }
+  .eyebrow::before{content:""; width:7px; height:7px; background:var(--gold); border-radius:50%; display:inline-block;}
+  .name-block{position:relative;}
+  .sig-watermark{
+    position:absolute;
+    left:-18px; top:50%;
+    transform:translateY(-52%);
+    width:min(560px, 145%);
+    max-width:none;
+    opacity:0.16;
+    pointer-events:none;
+    z-index:0;
+    filter:brightness(0) invert(1); /* force pure white regardless of source */
+  }
+  .hero-copy h1{
+    position:relative; z-index:1;
+    font-family:'Oswald',sans-serif; font-weight:700; font-size:clamp(40px,6vw,64px);
+    line-height:0.95; margin:0 0 6px; letter-spacing:0.01em;
+  }
+  .hero-copy .sub{
+    position:relative; z-index:1;
+    font-family:'Oswald',sans-serif; font-weight:400; font-size:16px; letter-spacing:0.04em;
+    color:var(--gold); margin-bottom:22px;
+  }
+  .hero-copy p.lede{
+    font-size:17px; line-height:1.55; max-width:44ch; color:#F4E6D3; margin:0 0 30px;
+  }
+  .cta-row{display:flex; flex-wrap:wrap; gap:12px;}
+  .btn{
+    font-family:'Oswald',sans-serif; font-size:13.5px; letter-spacing:0.06em; text-transform:uppercase;
+    padding:14px 22px; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    border:1.5px solid transparent; transition:all .15s ease;
+  }
+  .btn-primary{background:var(--paper); color:var(--crimson-dark); font-weight:600;}
+  .btn-primary:hover{background:#fff;}
+  .btn-outline{border-color:rgba(245,245,241,0.55); color:var(--paper);}
+  .btn-outline:hover{border-color:var(--paper); background:rgba(245,245,241,0.08);}
+
+  /* ---- Quick facts strip ---- */
+  .facts{
+    background:var(--crimson); color:var(--paper);
+    border-bottom:2px solid var(--ink);
+  }
+  .facts .wrap{
+    display:grid; grid-template-columns:repeat(6,1fr);
+    padding:0;
+  }
+  @media (max-width:900px){ .facts .wrap{grid-template-columns:repeat(3,1fr);} }
+  @media (max-width:520px){ .facts .wrap{grid-template-columns:repeat(2,1fr);} }
+  .fact{
+    padding:20px 16px; border-right:1px solid rgba(245,245,241,0.25);
+    text-align:center;
+  }
+  .fact:last-child{border-right:none;}
+  .fact .k{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; opacity:0.65; margin-bottom:6px;}
+  .fact .v{font-family:'Oswald',sans-serif; font-weight:600; font-size:15px; letter-spacing:0.01em;}
+
+  /* ---- Section shell ---- */
+  section{padding:64px 0;}
+  .section-head{margin-bottom:34px; border-bottom:2px solid var(--ink); padding-bottom:14px; display:flex; align-items:baseline; justify-content:space-between; gap:20px; flex-wrap:wrap;}
+  .section-head h2{font-family:'Oswald',sans-serif; font-weight:700; font-size:28px; margin:0; letter-spacing:0.01em;}
+  .section-head .tag{font-family:'IBM Plex Mono',monospace; font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--clay);}
+
+  /* ---- Career headline numbers ---- */
+  .stat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--ink); border:1px solid var(--ink); margin-bottom:10px;}
+  @media (max-width:700px){ .stat-grid{grid-template-columns:repeat(2,1fr);} }
+  .stat-cell{
+    background:var(--paper); padding:26px 18px; text-align:center;
+    border:none; width:100%; cursor:pointer; font:inherit; color:inherit;
+    position:relative; transition:background .15s ease;
+  }
+  .stat-cell:hover{background:var(--paper-dim);}
+  .stat-cell.active{background:var(--ink);}
+  .stat-cell.active .num{color:#fff;}
+  .stat-cell.active .lbl{color:var(--gold);}
+  .stat-cell .num{font-family:'Oswald',sans-serif; font-weight:700; font-size:36px; color:var(--crimson);}
+  .stat-cell .lbl{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; margin-top:4px; color:#4a4437;}
+  .stat-cell .tap-hint{
+    font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.06em; text-transform:uppercase;
+    color:#a39c86; margin-top:8px; opacity:0.85;
+  }
+  .stat-cell.active .tap-hint{color:rgba(245,245,241,0.55);}
+  .stat-note{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#6b6350; text-align:right;}
+
+  .stat-breakdown{
+    max-height:0; overflow:hidden; opacity:0;
+    border:0 solid var(--ink); border-width:0 1px;
+    transition:max-height .35s ease, opacity .3s ease, border-width .35s ease, margin .35s ease;
+    margin-bottom:0;
+  }
+  .stat-breakdown.open{
+    max-height:340px; opacity:1; border-width:0 1px 1px 1px; margin-bottom:16px;
+  }
+  .stat-breakdown-inner{padding:18px 20px 20px;}
+  .stat-breakdown-head{
+    display:flex; justify-content:space-between; align-items:baseline; margin-bottom:12px;
+    font-family:'Oswald',sans-serif; letter-spacing:0.02em;
+  }
+  .stat-breakdown-head .metric-name{font-weight:600; font-size:15px; color:var(--ink);}
+  .stat-breakdown-head .metric-close{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase;
+    color:#6b6350; background:none; border:none; cursor:pointer; padding:0;
+  }
+  .stat-breakdown-head .metric-close:hover{color:var(--crimson-dark);}
+  .breakdown-rows{display:flex; flex-direction:column; gap:7px;}
+  .breakdown-row{display:grid; grid-template-columns:160px 1fr 70px; align-items:center; gap:12px;}
+  .breakdown-row .season{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#4a4437;}
+  .breakdown-row .bar-track{background:var(--paper-dim); height:16px; position:relative; border:1px solid var(--rule); overflow:hidden;}
+  .breakdown-row .bar-fill{background:var(--ink); height:100%; width:0%; transition:width .6s ease;}
+  .breakdown-row .val{font-family:'IBM Plex Mono',monospace; font-size:12.5px; text-align:right; font-weight:600; color:var(--ink);}
+  .breakdown-row.is-career .season, .breakdown-row.is-career .val{color:var(--crimson-dark); font-weight:700;}
+  .breakdown-row.is-career .bar-fill{background:var(--crimson);}
+  .breakdown-foot{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#8a8265; margin-top:12px; line-height:1.5;
+  }
+
+  /* ---- Narrative ---- */
+  .narrative{columns:2; column-gap:44px;}
+  @media (max-width:800px){ .narrative{columns:1;} }
+  .narrative h3{font-family:'Oswald',sans-serif; font-size:16px; letter-spacing:0.04em; text-transform:uppercase; color:var(--crimson-dark); margin:0 0 8px; break-after:avoid;}
+  .narrative .block{break-inside:avoid; margin-bottom:26px;}
+  .narrative p{font-size:15.5px; line-height:1.65; margin:0; color:#2b2620;}
+  .narrative strong{color:var(--ink);}
+
+  /* ---- Scorecard table ---- */
+  .card-frame{border:2px solid var(--ink);}
+  .card-title{
+    background:var(--ink); color:var(--paper); font-family:'Oswald',sans-serif;
+    font-size:13px; letter-spacing:0.1em; text-transform:uppercase; padding:10px 16px;
+    display:flex; justify-content:space-between;
+  }
+  .table-scroll{overflow-x:auto;}
+  table{width:100%; border-collapse:collapse; font-family:'IBM Plex Mono',monospace; font-size:12.5px; min-width:760px;}
+  thead th{
+    text-align:center; padding:10px 8px; border-bottom:2px solid var(--ink);
+    font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; color:#4a4437;
+  }
+  thead th:first-child{text-align:left;}
+  tbody td{padding:11px 8px; text-align:center; border-bottom:1px solid var(--rule);}
+  tbody td:first-child{text-align:left; font-family:'Oswald',sans-serif; font-weight:500; letter-spacing:0.01em; text-transform:none; font-size:13px;}
+  .status-pill{
+    display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:0.06em; text-transform:uppercase;
+    padding:3px 8px; border:1px solid var(--clay); color:var(--clay);
+    min-width:78px; text-align:center; box-sizing:border-box;
+  }
+  .status-pill.confirmed{border-color:var(--crimson-dark); color:var(--crimson-dark);}
+  .dash{color:#a39c86;}
+
+  tr.next-event{background:var(--ink);}
+  tr.next-event td{color:var(--paper); border-bottom-color:rgba(245,245,241,0.2);}
+  tr.next-event td:first-child{color:var(--paper);}
+  tr.next-event .dash{color:rgba(245,245,241,0.55);}
+  tr.next-event .status-pill{border-color:rgba(245,245,241,0.55); color:var(--paper);}
+  tr.next-event .status-pill.confirmed{border-color:var(--gold); color:var(--gold);}
+  tbody tr.total{background:var(--paper-dim); font-weight:600;}
+  tbody tr.total td{border-top:2px solid var(--ink); border-bottom:none; color:var(--crimson-dark);}
+  .hl{color:var(--crimson-dark); font-weight:600;}
+  .src-note{font-family:'IBM Plex Mono',monospace; font-size:11px; color:#6b6350; padding:10px 16px; border-top:1px solid var(--rule);}
+
+  /* ---- Positions ---- */
+  .pos-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  @media (max-width:700px){ .pos-grid{grid-template-columns:1fr;} }
+  .pos-card{border:1.5px solid var(--ink); padding:20px; background:var(--paper-dim);}
+  .pos-card .tag{
+    display:inline-block; font-family:'Oswald',sans-serif; font-weight:700; font-size:13px;
+    background:var(--crimson); color:var(--paper); padding:3px 10px; margin-bottom:10px;
+  }
+  .pos-card .innings{font-family:'Oswald',sans-serif; font-weight:700; font-size:26px; color:var(--ink);}
+  .pos-card .innings span{font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:400; color:#6b6350;}
+  .pos-card p{font-size:13.5px; line-height:1.5; color:#3a352b; margin:8px 0 0;}
+
+  /* ---- Video ---- */
+  .video-frame{border:2px solid var(--ink); background:#000; position:relative; padding-bottom:56.25%; height:0; overflow:hidden;}
+  .video-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+
+  /* ---- Sponsor ---- */
+  .sponsor{background:var(--ink); color:var(--paper);}
+  .sponsor .wrap{padding:64px 24px; text-align:center;}
+  .sponsor .eyebrow{color:var(--gold); justify-content:center;}
+  .sponsor h2{font-family:'Oswald',sans-serif; font-weight:700; font-size:clamp(28px,4vw,40px); margin:6px 0 14px;}
+  .sponsor p{max-width:56ch; margin:0 auto 30px; color:#D8D0BC; line-height:1.6; font-size:15.5px;}
+  .tier-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--ink); border:1px solid var(--ink); margin:20px 0;}
+  @media (max-width:800px){ .tier-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:480px){ .tier-grid{grid-template-columns:1fr;} }
+  .tier-cell{background:var(--paper); padding:18px 16px;}
+  .tier-cell .amt{font-family:'Oswald',sans-serif; font-weight:700; font-size:20px; color:var(--crimson-dark);}
+  .tier-cell p{font-size:13px; line-height:1.5; color:#3a352b; margin:6px 0 0;}
+  .lede-kicker{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--clay); margin:0 0 14px;}
+
+  /* ---- Three ways to help ---- */
+  .help-stack{display:flex; flex-direction:column; gap:22px; margin-top:44px; text-align:left;}
+  .help-panel{background:var(--paper);}
+  .help-panel .help-body{padding:24px 26px 28px;}
+  .help-panel .help-body > p{color:#36322a; font-size:14.5px; line-height:1.6; margin:0 0 18px; max-width:64ch;}
+  .help-panel .cta-row{justify-content:flex-start;}
+
+  .btn-solid{background:var(--ink); color:var(--paper); font-weight:600; border-color:var(--ink);}
+  .btn-solid:hover{background:var(--crimson-dark); border-color:var(--crimson-dark);}
+  .btn-ghost{background:transparent; color:var(--ink); border-color:var(--ink);}
+  .btn-ghost:hover{background:var(--paper-dim);}
+  .btn[disabled]{opacity:0.4; cursor:not-allowed; pointer-events:none;}
+
+  .cal-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:14px; flex-wrap:wrap; gap:10px;}
+  .cal-month{font-family:'Oswald',sans-serif; font-weight:700; font-size:16px; letter-spacing:0.02em; color:var(--ink);}
+  .cal-legend{display:flex; gap:14px; font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:0.05em; text-transform:uppercase; color:#6b6350;}
+  .cal-legend span{display:inline-flex; align-items:center; gap:5px;}
+  .legend-dot{width:9px; height:9px; display:inline-block; border:1px solid var(--rule);}
+  .legend-dot.avail{background:var(--paper-dim);}
+  .legend-dot.sold{background:var(--ink);}
+  .legend-dot.pending{background:#fff4d6; border-color:var(--gold);}
+
+  .cal-weekdays{display:grid; grid-template-columns:repeat(7,1fr); gap:6px; margin-bottom:6px;}
+  .cal-weekdays span{font-family:'IBM Plex Mono',monospace; font-size:10px; text-align:center; color:#8a8265; letter-spacing:0.05em;}
+  .cal-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:6px;}
+  .cal-day{
+    aspect-ratio:1; border:1px solid var(--rule); background:var(--paper-dim);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono',monospace; cursor:pointer; padding:2px;
+    transition:transform .12s ease, background .12s ease; font-size:13px; font-weight:600; color:var(--ink);
+  }
+  .cal-day:hover:not(.sold):not(.blank){background:#fff; border-color:var(--ink); transform:translateY(-1px);}
+  .cal-day.blank{visibility:hidden; cursor:default;}
+  .cal-day.sold{background:var(--ink); color:var(--paper); cursor:not-allowed;}
+  .cal-day.pending{background:#fff4d6; border-color:var(--gold);}
+  .cal-day.selected{outline:2px solid var(--crimson); outline-offset:-2px;}
+
+  .cal-picker{margin-top:18px; border:1.5px solid var(--ink); background:var(--paper-dim); padding:16px 18px; display:none;}
+  .cal-picker.open{display:block;}
+  .cal-picker .pick-head{font-family:'Oswald',sans-serif; font-weight:600; font-size:14px; margin-bottom:12px; color:var(--ink);}
+  .amount-chips{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .amount-chip{
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px; padding:8px 15px; border:1.5px solid var(--ink);
+    background:var(--paper); cursor:pointer; color:var(--ink);
+  }
+  .amount-chip.active{background:var(--ink); color:var(--paper);}
+  .amount-custom{
+    display:inline-flex; align-items:center; gap:6px; border:1.5px solid var(--ink); background:var(--paper);
+    padding:0 4px 0 12px;
+  }
+  .amount-custom span{font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--ink);}
+  .amount-custom input{
+    width:88px; border:none; background:transparent; font-family:'IBM Plex Mono',monospace; font-size:13px;
+    padding:9px 8px 9px 0; color:var(--ink); outline:none;
+  }
+  .amount-custom input::placeholder{color:#a39c86;}
+  .amount-custom.active{border-color:var(--crimson-dark);}
+  .cal-picker .give-note{font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#6b6350; margin-top:12px; line-height:1.55;}
+  .cal-foot-note{font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#6b6350; margin-top:16px; line-height:1.55;}
+
+  footer{border-top:2px solid var(--ink); background:var(--paper);}
+  footer .wrap{padding:36px 24px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px; align-items:center;}
+  footer h4{font-family:'Oswald',sans-serif; font-size:14px; letter-spacing:0.04em; margin:0 0 4px;}
+  footer p{margin:2px 0; font-size:13px; color:#4a4437;}
+  footer a{color:var(--crimson-dark);}
+  .foot-social{display:flex; gap:12px;}
+  .foot-social a{
+    width:38px; height:38px; border:1.5px solid var(--ink); display:flex; align-items:center; justify-content:center;
+    text-decoration:none; color:var(--ink); font-family:'Oswald',sans-serif; font-size:11px;
+  }
+  .copyright{text-align:center; font-family:'IBM Plex Mono',monospace; font-size:11px; color:#8a8265; padding:14px 0 26px;}
+
+  .reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:none;}
+</style>
+
+
+<section id="sponsor" class="sponsor">
+  <!-- Panel widened by 15% -->
+  <div class="wrap" style="width: 115%; max-width: 1265px; margin: 0 auto;">
+    <div class="eyebrow">Support the Journey</div>
+    <h2>Three Ways to Help</h2>
+    <p style="text-align: justify;">Contributions go directly toward tournament registration, showcases, hitting instruction, and athletic training &mdash; every dollar keeps out team in front of college scouts.</p>
+
+    <div class="help-stack">
+
+      <div class="card-frame help-panel">
+        <div class="card-title"><span>1 &middot; Fuel the Blaze</span><span>General Fund</span></div>
+        <div class="help-body">
+          <div class="lede-kicker">A gift that goes wherever it's needed most</div>
+
+          <!-- Two-column grid placing text on left and image on the right -->
+          <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: start; margin-bottom: 1.5rem;">
+            <div style="text-align: justify;">
+              <p style="margin-top: 0;">Every Blaze girl steps onto the field carrying a spark &mdash; a dream of playing at the next level, and the grit to chase it. Turning that spark into something unstoppable takes fuel: tournament entry fees, travel, lodging, and gear that keeps them safe and competitive.</p>
+
+              <p>A gift toward our 2026 Season Fund &mdash; via a one-time or ongoing contribution &mdash; are two ways you can help keep the Blaze burning. The coachng staff will ensure that every gift goes directly to supporting the needs of every player on the team. Needs could include hotel blocks for regionals, meals while traveling, traveling expenses, replacement gear, tournament fees and other incidentals that arise as we play throughout 2026.  Your help and support means so much to our team.</p>
+            </div>
+
+            <!-- Image placed in the right white space -->
+            <div>
+              <img 
+                src="C:\Users\andre\Downloads\Avery_Satchell_2030\ChatGPT Image Aug 17, 2026, 08_36_28 PM.png" 
+                alt="Blaze logo" 
+                style="width: 85%; height: 85%; min-height: 280px; object-fit: cover; border-radius: 6px; display: block;"
+              />
+            </div>
+          </div>
+
+          <p style="font-weight:600; color:var(--ink); margin-bottom:4px;">Every gift matters, at every level:</p>
+          <div class="tier-grid">
+            <div class="tier-cell"><div class="amt">$25<span style="font-size:12px;">/mo</span></div><p>Keeps a player's gear bag stocked all season.</p></div>
+            <div class="tier-cell"><div class="amt">$100</div><p>Covers one athlete's tournament entry fee.</p></div>
+            <div class="tier-cell"><div class="amt">$500</div><p>Sponsor a weekend of lodging for the team.</p></div>
+            <div class="tier-cell"><div class="amt">+$1,000+</div><p>Become a season-long partner, with your name on our team banner.</p></div>
+          </div>
+
+          <div class="cta-row">
+            <a href="#" class="btn btn-solid">Sponsor via Team Fund</a>
+            <a href="mailto:ralewis0804@gmail.com" class="btn btn-ghost">Contact Coach Lewis</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+<!-- 2. Sponsor a Day Panel -->
+<div class="card-frame help-panel">
+  <div class="card-title"><span>2 &middot; Sponsor a Day</span><span>August 2026</span></div>
+  <div class="help-body" style="color: #1a1a1a;">
+
+    <style>
+      /* Google Font Import for clean athletic-modern typography */
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Oswald:wght@600;700&display=swap');
+
+      .promo-banner {
+        background: linear-gradient(135deg, #0b1528 0%, #162a4d 60%, #8b1e1e 100%);
+        border-radius: 12px;
+        padding: 2.25rem 2rem;
+        color: #ffffff;
+        font-family: 'Montserrat', sans-serif;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+        margin: 0 0 1.75rem 0;
+      }
+
+      /* Decorative glowing backdrop element */
+      .promo-banner::before {
+        content: '';
+        position: absolute;
+        top: -40%;
+        right: -10%;
+        width: 320px;
+        height: 320px;
+        background: radial-gradient(circle, rgba(224, 75, 40, 0.25) 0%, rgba(0,0,0,0) 70%);
+        pointer-events: none;
+      }
+
+      .promo-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 1rem;
+      }
+
+      .promo-icon-badge {
+        background: #d93829;
+        color: #fff;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        box-shadow: 0 0 12px rgba(217, 56, 41, 0.6);
+        flex-shrink: 0;
+      }
+
+      .promo-title {
+        font-family: 'Oswald', sans-serif;
+        font-size: 1.85rem;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        color: #ffffff;
+        margin: 0;
+      }
+
+      .promo-body {
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: #e2e8f0;
+        margin-bottom: 1.5rem;
+        text-align: justify;
+      }
+
+      .promo-body strong {
+        color: #ffd166;
+        font-weight: 700;
+      }
+
+      .promo-features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 1.25rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid rgba(255,255,255,0.15);
+      }
+
+      .feature-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #f8fafc;
+      }
+
+      .feature-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #ffd166;
+        display: inline-block;
+      }
+    </style>
+
+    <!-- Promotional Giving Banner -->
+    <div class="promo-banner">
+      <div class="promo-header">
+        <div class="promo-icon-badge">⚡</div>
+        <h3 class="promo-title">Lock In Your Day &middot; Back the Journey</h3>
+      </div>
+
+      <div class="promo-body">
+        To help me directly &mdash; consider selecting a day or multiple days on the calendar. Each day represents a <strong>$10 donation</strong> by default, or you can type in whatever amount you'd like by selecting <strong>"SUPPORT"</strong>. 
+        <br><br>
+        Send it via <strong>Cash App</strong> &mdash; once a day's payment is confirmed, it's marked <strong>SOLD</strong> and locked for the rest of the monthly campaign.
+      </div>
+
+      <div class="promo-features">
+        <div class="feature-item">
+          <span class="feature-dot"></span>
+          <span>Default $10 or Custom Gift</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-dot" style="background-color: #d93829;"></span>
+          <span>Instant Calendar Locking</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-dot" style="background-color: #4ade80;"></span>
+          <span>All Donors Acknowledged!</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Embedded Calendar from calendar.html -->
+    <div style="width: 100%; max-width: 650px; margin: 1.5rem auto; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+      <iframe 
+        src="calendar.html" 
+        title="August 2026 Sponsor Calendar"
+        style="width: 100%; height: 600px; border: none; display: block;"
+        scrolling="no">
+      </iframe>
+    </div>
+
+    <div class="cal-foot-note" style="color: #4a4a4a; text-align: center; margin-top: 1rem; font-size: 0.95rem;">
+      Cash App: <strong>$AverySatchell18</strong>. Please include your chosen date in the note so we can mark it confirmed.
+    </div>
+
+    <div class="cta-row" style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem;">
+      <a href="calendar.html" target="_blank" rel="noopener" class="btn btn-ghost">Open Calendar in Full Screen</a>
+    </div>
+  </div>
+</div>
+
+<!-- Load External Sponsor Calendar Logic -->
+<script src="sponsor-calendar.js"></script>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+      <div class="card-frame help-panel">
+        <div class="card-title"><span>3 &middot; Book a Lesson</span><span>10U &amp; Under</span></div>
+        <div class="help-body">
+          <p>45-minute private hitting lessons for younger players (10U and under) looking to build fundamentals. Sessions are supervised with a parent or guardian on site.</p>
+          <div class="cta-row">
+            <a href="mailto:info@averysatchellsoftball.com?subject=45-Minute%20Hitting%20Lesson%20Request&body=Player%20name%3A%0APlayer%20age%2Fdivision%3A%0APreferred%20days%2Ftimes%3A%0AContact%20phone%3A%0A" class="btn btn-solid">Request a Lesson</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

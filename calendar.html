@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support Avery Satchell</title>
+  <style>
+    :root {
+      --blaze-navy: #0f223d;
+      --blaze-red: #a4292d;
+      --blaze-white: #ffffff;
+      --blaze-border: #0a1626;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Impact", sans-serif;
+      background-color: var(--blaze-navy);
+      color: var(--blaze-white);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px;
+      margin: 0;
+    }
+
+    .calendar-container {
+      max-width: 500px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 6px;
+    }
+
+    .month-header {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      color: var(--blaze-white);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      text-shadow: 2px 2px 0px var(--blaze-border);
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 5px;
+      background-color: var(--blaze-navy);
+      padding: 8px;
+      border: 3px solid var(--blaze-white);
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      width: 100%;
+    }
+
+    .day-header {
+      text-align: center;
+      font-weight: 900;
+      font-size: 1.25rem;
+      color: var(--blaze-red);
+      padding: 6px 0;
+      text-shadow: 1px 1px 0px #ffffff;
+      user-select: none;
+    }
+
+    .cell {
+      aspect-ratio: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border-radius: 6px;
+      border: 2px solid var(--blaze-border);
+      transition: transform 0.12s ease, filter 0.12s ease;
+      cursor: pointer;
+      user-select: none;
+      padding: 2px;
+      overflow: hidden;
+    }
+
+    .cell:hover {
+      filter: brightness(1.1);
+      transform: scale(0.96);
+    }
+
+    /* Alternating Column Colors */
+    .cell.col-even {
+      background-color: var(--blaze-white);
+    }
+
+    .cell.col-odd {
+      background-color: var(--blaze-red);
+    }
+
+    /* Support Tile Styling */
+    .cell .support-label {
+      font-size: clamp(0.48rem, 1.8vw, 0.7rem);
+      font-weight: 900;
+      letter-spacing: 0.2px;
+      text-transform: uppercase;
+      line-height: 1;
+      text-align: center;
+    }
+
+    .cell .support-sub {
+      font-size: clamp(0.55rem, 2vw, 0.8rem);
+      font-weight: 900;
+      margin-top: 3px;
+      line-height: 1;
+    }
+
+    /* Date Number & Amount Styling */
+    .cell .num {
+      font-size: 1.45rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .cell .badge-amount {
+      font-size: 0.75rem;
+      font-weight: 900;
+      margin-top: 3px;
+      line-height: 1;
+    }
+
+    /* Contrast Rules */
+    .cell.col-even .num,
+    .cell.col-even .badge-amount,
+    .cell.col-even .support-label,
+    .cell.col-even .support-sub {
+      color: var(--blaze-navy);
+    }
+
+    .cell.col-odd .num,
+    .cell.col-odd .badge-amount,
+    .cell.col-odd .support-label,
+    .cell.col-odd .support-sub {
+      color: var(--blaze-white);
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .team-footer {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 1.2rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: var(--blaze-red);
+      text-shadow: 1px 1px 0px #ffffff;
+      font-style: italic;
+    }
+
+    @media (max-width: 440px) {
+      .cell .num { font-size: 1.15rem; }
+      .cell .badge-amount { font-size: 0.65rem; }
+      .day-header { font-size: 1rem; }
+      .month-header { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="calendar-container">
+    <div id="calendar-title" class="month-header"></div>
+    <div id="calendar-grid" class="calendar-grid">
+      <div class="day-header">S</div>
+      <div class="day-header">M</div>
+      <div class="day-header">TU</div>
+      <div class="day-header">W</div>
+      <div class="day-header">TH</div>
+      <div class="day-header">F</div>
+      <div class="day-header">S</div>
+    </div>
+  </div>
+
+  <script>
+    const CASHTAG = "AverySatch18"; 
+    const CALENDAR_DATE_AMOUNT = 10;
+
+    const monthNames = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+
+    const today = new Date();
+    const currentYear = today.getFullYear();
+    const currentMonth = today.getMonth();
+
+    document.getElementById("calendar-title").innerText = `${monthNames[currentMonth]} ${currentYear}`;
+
+    const firstDayOfWeek = new Date(currentYear, currentMonth, 1).getDay();
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const grid = document.getElementById("calendar-grid");
+
+    let currentColumn = 0;
+
+    function createDateCell(day, columnIndex) {
+      const link = document.createElement("a");
+      
+      link.href = `https://cash.app/$${CASHTAG}/${CALENDAR_DATE_AMOUNT}`;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.className = `cell ${columnIndex % 2 === 0 ? "col-even" : "col-odd"}`;
+      link.innerHTML = `
+        <span class="num">${day}</span>
+        <span class="badge-amount">$${CALENDAR_DATE_AMOUNT}</span>
+      `;
+      return link;
+    }
+
+    function createSupportCell(columnIndex) {
+      const link = document.createElement("a");
+      link.href = `https://cash.app/$${CASHTAG}/${CALENDAR_DATE_AMOUNT}`;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.className = `cell ${columnIndex % 2 === 0 ? "col-even" : "col-odd"}`;
+      link.innerHTML = `
+        <span class="support-label">SUPPORT</span>
+      `;
+      return link;
+    }
+
+    // 1. Fill leading slots
+    for (let i = 0; i < firstDayOfWeek; i++) {
+      grid.appendChild(createSupportCell(currentColumn % 7));
+      currentColumn++;
+    }
+
+    // 2. Fill active calendar days
+    for (let day = 1; day <= daysInMonth; day++) {
+      grid.appendChild(createDateCell(day, currentColumn % 7));
+      currentColumn++;
+    }
+
+    // 3. Fill trailing slots
+    const remainingSlots = (7 - (currentColumn % 7)) % 7;
+    for (let i = 0; i < remainingSlots; i++) {
+      grid.appendChild(createSupportCell(currentColumn % 7));
+      currentColumn++;
+    }
+  </script>
+</body>
+</html>

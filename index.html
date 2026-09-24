@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avery Satchell #8 | Class of 2030 Fastpitch Recruiting Profile</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper:#F5F5F1;
+    --paper-dim:#E7E8E4;
+    --ink:#0F1E3C;
+    --crimson:#C8102E;
+    --crimson-dark:#94081F;
+    --clay:#46587A;
+    --gold:#FF6B7A;
+    --rule:#C7CBD4;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Source Serif 4', Georgia, serif;
+  }
+  .display{font-family:'Oswald', sans-serif; text-transform:uppercase; letter-spacing:0.02em;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px;}
+
+  /* ---- Header rule ---- */
+  .topline{
+    border-bottom:2px solid var(--ink);
+    background:var(--paper);
+  }
+  .topline .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:14px; padding-bottom:14px;
+  }
+  .brandmark{display:flex; align-items:baseline; gap:10px; position:relative; padding-left:2px;}
+  .brandmark .sig-mini{
+    position:absolute;
+    left:-6px; top:50%;
+    transform:translateY(-50%);
+    height:70px; width:auto;
+    opacity:0.14;
+    pointer-events:none;
+    z-index:0;
+  }
+  .brandmark .num{position:relative; z-index:1; font-family:'Oswald',sans-serif; font-weight:700; font-size:22px; color:var(--crimson);}
+  .brandmark .name{position:relative; z-index:1; font-family:'Oswald',sans-serif; font-weight:600; letter-spacing:0.08em; font-size:15px;}
+  .toplinks{display:flex; gap:22px; font-family:'Oswald',sans-serif; font-size:12.5px; letter-spacing:0.08em;}
+  .toplinks a{color:var(--ink); text-decoration:none; border-bottom:1px solid transparent;}
+  .toplinks a:hover{border-bottom-color:var(--crimson); color:var(--crimson);}
+  @media (max-width:640px){ .toplinks{display:none;} }
+
+  /* ---- Hero ---- */
+  .hero{position:relative; background:var(--ink); overflow:hidden;}
+  .hero-grid{
+    display:grid; grid-template-columns: 1.05fr 1fr; align-items:stretch;
+  }
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
+  .hero-photo{
+    position:relative;
+    min-height:460px;
+  }
+  .hero-photo img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .hero-copy{
+    color:var(--paper);
+    padding:56px 44px;
+    display:flex; flex-direction:column; justify-content:center;
+    position:relative;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.18em;
+    text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:8px; margin-bottom:18px;
+  }
+  .eyebrow::before{content:""; width:7px; height:7px; background:var(--gold); border-radius:50%; display:inline-block;}
+  .name-block{position:relative;}
+  .sig-watermark{
+    position:absolute;
+    left:-18px; top:50%;
+    transform:translateY(-52%);
+    width:min(560px, 145%);
+    max-width:none;
+    opacity:0.16;
+    pointer-events:none;
+    z-index:0;
+    filter:brightness(0) invert(1); /* force pure white regardless of source */
+  }
+  .hero-copy h1{
+    position:relative; z-index:1;
+    font-family:'Oswald',sans-serif; font-weight:700; font-size:clamp(40px,6vw,64px);
+    line-height:0.95; margin:0 0 6px; letter-spacing:0.01em;
+  }
+  .hero-copy .sub{
+    position:relative; z-index:1;
+    font-family:'Oswald',sans-serif; font-weight:400; font-size:16px; letter-spacing:0.04em;
+    color:var(--gold); margin-bottom:22px;
+  }
+  .hero-copy p.lede{
+    font-size:17px; line-height:1.55; max-width:44ch; color:#F4E6D3; margin:0 0 30px;
+  }
+  .cta-row{display:flex; flex-wrap:wrap; gap:12px;}
+  .btn{
+    font-family:'Oswald',sans-serif; font-size:13.5px; letter-spacing:0.06em; text-transform:uppercase;
+    padding:14px 22px; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    border:1.5px solid transparent; transition:all .15s ease;
+  }
+  .btn-primary{background:var(--paper); color:var(--crimson-dark); font-weight:600;}
+  .btn-primary:hover{background:#fff;}
+  .btn-outline{border-color:rgba(245,245,241,0.55); color:var(--paper);}
+  .btn-outline:hover{border-color:var(--paper); background:rgba(245,245,241,0.08);}
+
+  /* ---- Quick facts strip ---- */
+  .facts{
+    background:var(--crimson); color:var(--paper);
+    border-bottom:2px solid var(--ink);
+  }
+  .facts .wrap{
+    display:grid; grid-template-columns:repeat(6,1fr);
+    padding:0;
+  }
+  @media (max-width:900px){ .facts .wrap{grid-template-columns:repeat(3,1fr);} }
+  @media (max-width:520px){ .facts .wrap{grid-template-columns:repeat(2,1fr);} }
+  .fact{
+    padding:20px 16px; border-right:1px solid rgba(245,245,241,0.25);
+    text-align:center;
+  }
+  .fact:last-child{border-right:none;}
+  .fact .k{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; opacity:0.65; margin-bottom:6px;}
+  .fact .v{font-family:'Oswald',sans-serif; font-weight:600; font-size:15px; letter-spacing:0.01em;}
+
+  /* ---- Section shell ---- */
+  section{padding:64px 0;}
+  .section-head{margin-bottom:34px; border-bottom:2px solid var(--ink); padding-bottom:14px; display:flex; align-items:baseline; justify-content:space-between; gap:20px; flex-wrap:wrap;}
+  .section-head h2{font-family:'Oswald',sans-serif; font-weight:700; font-size:28px; margin:0; letter-spacing:0.01em;}
+  .section-head .tag{font-family:'IBM Plex Mono',monospace; font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--clay);}
+
+  /* ---- Career headline numbers ---- */
+  .stat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--ink); border:1px solid var(--ink); margin-bottom:10px;}
+  @media (max-width:700px){ .stat-grid{grid-template-columns:repeat(2,1fr);} }
+  .stat-cell{
+    background:var(--paper); padding:26px 18px; text-align:center;
+    border:none; width:100%; cursor:pointer; font:inherit; color:inherit;
+    position:relative; transition:background .15s ease;
+  }
+  .stat-cell:hover{background:var(--paper-dim);}
+  .stat-cell.active{background:var(--ink);}
+  .stat-cell.active .num{color:#fff;}
+  .stat-cell.active .lbl{color:var(--gold);}
+  .stat-cell .num{font-family:'Oswald',sans-serif; font-weight:700; font-size:36px; color:var(--crimson);}
+  .stat-cell .lbl{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; margin-top:4px; color:#4a4437;}
+  .stat-cell .tap-hint{
+    font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.06em; text-transform:uppercase;
+    color:#a39c86; margin-top:8px; opacity:0.85;
+  }
+  .stat-cell.active .tap-hint{color:rgba(245,245,241,0.55);}
+  .stat-note{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#6b6350; text-align:right;}
+
+  .stat-breakdown{
+    max-height:0; overflow:hidden; opacity:0;
+    border:0 solid var(--ink); border-width:0 1px;
+    transition:max-height .35s ease, opacity .3s ease, border-width .35s ease, margin .35s ease;
+    margin-bottom:0;
+  }
+  .stat-breakdown.open{
+    max-height:340px; opacity:1; border-width:0 1px 1px 1px; margin-bottom:16px;
+  }
+  .stat-breakdown-inner{padding:18px 20px 20px;}
+  .stat-breakdown-head{
+    display:flex; justify-content:space-between; align-items:baseline; margin-bottom:12px;
+    font-family:'Oswald',sans-serif; letter-spacing:0.02em;
+  }
+  .stat-breakdown-head .metric-name{font-weight:600; font-size:15px; color:var(--ink);}
+  .stat-breakdown-head .metric-close{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase;
+    color:#6b6350; background:none; border:none; cursor:pointer; padding:0;
+  }
+  .stat-breakdown-head .metric-close:hover{color:var(--crimson-dark);}
+  .breakdown-rows{display:flex; flex-direction:column; gap:7px;}
+  .breakdown-row{display:grid; grid-template-columns:160px 1fr 70px; align-items:center; gap:12px;}
+  .breakdown-row .season{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#4a4437;}
+  .breakdown-row .bar-track{background:var(--paper-dim); height:16px; position:relative; border:1px solid var(--rule); overflow:hidden;}
+  .breakdown-row .bar-fill{background:var(--ink); height:100%; width:0%; transition:width .6s ease;}
+  .breakdown-row .val{font-family:'IBM Plex Mono',monospace; font-size:12.5px; text-align:right; font-weight:600; color:var(--ink);}
+  .breakdown-row.is-career .season, .breakdown-row.is-career .val{color:var(--crimson-dark); font-weight:700;}
+  .breakdown-row.is-career .bar-fill{background:var(--crimson);}
+  .breakdown-foot{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#8a8265; margin-top:12px; line-height:1.5;
+  }
+
+  /* ---- Narrative ---- */
+  .narrative{columns:2; column-gap:44px;}
+  @media (max-width:800px){ .narrative{columns:1;} }
+  .narrative h3{font-family:'Oswald',sans-serif; font-size:16px; letter-spacing:0.04em; text-transform:uppercase; color:var(--crimson-dark); margin:0 0 8px; break-after:avoid;}
+  .narrative .block{break-inside:avoid; margin-bottom:26px;}
+  .narrative p{font-size:15.5px; line-height:1.65; margin:0; color:#2b2620;}
+  .narrative strong{color:var(--ink);}
+
+  /* ---- Scorecard table ---- */
+  .card-frame{border:2px solid var(--ink);}
+  .card-title{
+    background:var(--ink); color:var(--paper); font-family:'Oswald',sans-serif;
+    font-size:13px; letter-spacing:0.1em; text-transform:uppercase; padding:10px 16px;
+    display:flex; justify-content:space-between;
+  }
+  .table-scroll{overflow-x:auto;}
+  table{width:100%; border-collapse:collapse; font-family:'IBM Plex Mono',monospace; font-size:12.5px; min-width:760px;}
+  thead th{
+    text-align:center; padding:10px 8px; border-bottom:2px solid var(--ink);
+    font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; color:#4a4437;
+  }
+  thead th:first-child{text-align:left;}
+  tbody td{padding:11px 8px; text-align:center; border-bottom:1px solid var(--rule);}
+  tbody td:first-child{text-align:left; font-family:'Oswald',sans-serif; font-weight:500; letter-spacing:0.01em; text-transform:none; font-size:13px;}
+  .status-pill{
+    display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:0.06em; text-transform:uppercase;
+    padding:3px 8px; border:1px solid var(--clay); color:var(--clay);
+    min-width:78px; text-align:center; box-sizing:border-box;
+  }
+  .status-pill.confirmed{border-color:var(--crimson-dark); color:var(--crimson-dark);}
+  .dash{color:#a39c86;}
+
+  tr.next-event{background:var(--ink);}
+  tr.next-event td{color:var(--paper); border-bottom-color:rgba(245,245,241,0.2);}
+  tr.next-event td:first-child{color:var(--paper);}
+  tr.next-event .dash{color:rgba(245,245,241,0.55);}
+  tr.next-event .status-pill{border-color:rgba(245,245,241,0.55); color:var(--paper);}
+  tr.next-event .status-pill.confirmed{border-color:var(--gold); color:var(--gold);}
+  tbody tr.total{background:var(--paper-dim); font-weight:600;}
+  tbody tr.total td{border-top:2px solid var(--ink); border-bottom:none; color:var(--crimson-dark);}
+  .hl{color:var(--crimson-dark); font-weight:600;}
+  .src-note{font-family:'IBM Plex Mono',monospace; font-size:11px; color:#6b6350; padding:10px 16px; border-top:1px solid var(--rule);}
+
+  /* ---- Positions ---- */
+  .pos-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  @media (max-width:700px){ .pos-grid{grid-template-columns:1fr;} }
+  .pos-card{border:1.5px solid var(--ink); padding:20px; background:var(--paper-dim);}
+  .pos-card .tag{
+    display:inline-block; font-family:'Oswald',sans-serif; font-weight:700; font-size:13px;
+    background:var(--crimson); color:var(--paper); padding:3px 10px; margin-bottom:10px;
+  }
+  .pos-card .innings{font-family:'Oswald',sans-serif; font-weight:700; font-size:26px; color:var(--ink);}
+  .pos-card .innings span{font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:400; color:#6b6350;}
+  .pos-card p{font-size:13.5px; line-height:1.5; color:#3a352b; margin:8px 0 0;}
+
+  /* ---- Video ---- */
+  .video-frame{border:2px solid var(--ink); background:#000; position:relative; padding-bottom:56.25%; height:0; overflow:hidden;}
+  .video-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+
+  /* ---- Sponsor ---- */
+  .sponsor{background:var(--ink); color:var(--paper);}
+  .sponsor .wrap{padding:64px 24px; text-align:center;}
+  .sponsor .eyebrow{color:var(--gold); justify-content:center;}
+  .sponsor h2{font-family:'Oswald',sans-serif; font-weight:700; font-size:clamp(28px,4vw,40px); margin:6px 0 14px;}
+  .sponsor p{max-width:56ch; margin:0 auto 30px; color:#D8D0BC; line-height:1.6; font-size:15.5px;}
+  .tier-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--ink); border:1px solid var(--ink); margin:20px 0;}
+  @media (max-width:800px){ .tier-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:480px){ .tier-grid{grid-template-columns:1fr;} }
+  .tier-cell{background:var(--paper); padding:18px 16px;}
+  .tier-cell .amt{font-family:'Oswald',sans-serif; font-weight:700; font-size:20px; color:var(--crimson-dark);}
+  .tier-cell p{font-size:13px; line-height:1.5; color:#3a352b; margin:6px 0 0;}
+  .lede-kicker{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--clay); margin:0 0 14px;}
+
+  /* ---- Three ways to help ---- */
+  .help-stack{display:flex; flex-direction:column; gap:22px; margin-top:44px; text-align:left;}
+  .help-panel{background:var(--paper);}
+  .help-panel .help-body{padding:24px 26px 28px;}
+  .help-panel .help-body > p{color:#36322a; font-size:14.5px; line-height:1.6; margin:0 0 18px; max-width:64ch;}
+  .help-panel .cta-row{justify-content:flex-start;}
+
+  .btn-solid{background:var(--ink); color:var(--paper); font-weight:600; border-color:var(--ink);}
+  .btn-solid:hover{background:var(--crimson-dark); border-color:var(--crimson-dark);}
+  .btn-ghost{background:transparent; color:var(--ink); border-color:var(--ink);}
+  .btn-ghost:hover{background:var(--paper-dim);}
+  .btn[disabled]{opacity:0.4; cursor:not-allowed; pointer-events:none;}
+
+  .cal-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:14px; flex-wrap:wrap; gap:10px;}
+  .cal-month{font-family:'Oswald',sans-serif; font-weight:700; font-size:16px; letter-spacing:0.02em; color:var(--ink);}
+  .cal-legend{display:flex; gap:14px; font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:0.05em; text-transform:uppercase; color:#6b6350;}
+  .cal-legend span{display:inline-flex; align-items:center; gap:5px;}
+  .legend-dot{width:9px; height:9px; display:inline-block; border:1px solid var(--rule);}
+  .legend-dot.avail{background:var(--paper-dim);}
+  .legend-dot.sold{background:var(--ink);}
+  .legend-dot.pending{background:#fff4d6; border-color:var(--gold);}
+
+  .cal-weekdays{display:grid; grid-template-columns:repeat(7,1fr); gap:6px; margin-bottom:6px;}
+  .cal-weekdays span{font-family:'IBM Plex Mono',monospace; font-size:10px; text-align:center; color:#8a8265; letter-spacing:0.05em;}
+  .cal-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:6px;}
+  .cal-day{
+    aspect-ratio:1; border:1px solid var(--rule); background:var(--paper-dim);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono',monospace; cursor:pointer; padding:2px;
+    transition:transform .12s ease, background .12s ease; font-size:13px; font-weight:600; color:var(--ink);
+  }
+  .cal-day:hover:not(.sold):not(.blank){background:#fff; border-color:var(--ink); transform:translateY(-1px);}
+  .cal-day.blank{visibility:hidden; cursor:default;}
+  .cal-day.sold{background:var(--ink); color:var(--paper); cursor:not-allowed;}
+  .cal-day.pending{background:#fff4d6; border-color:var(--gold);}
+  .cal-day.selected{outline:2px solid var(--crimson); outline-offset:-2px;}
+
+  .cal-picker{margin-top:18px; border:1.5px solid var(--ink); background:var(--paper-dim); padding:16px 18px; display:none;}
+  .cal-picker.open{display:block;}
+  .cal-picker .pick-head{font-family:'Oswald',sans-serif; font-weight:600; font-size:14px; margin-bottom:12px; color:var(--ink);}
+  .amount-chips{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .amount-chip{
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px; padding:8px 15px; border:1.5px solid var(--ink);
+    background:var(--paper); cursor:pointer; color:var(--ink);
+  }
+  .amount-chip.active{background:var(--ink); color:var(--paper);}
+  .amount-custom{
+    display:inline-flex; align-items:center; gap:6px; border:1.5px solid var(--ink); background:var(--paper);
+    padding:0 4px 0 12px;
+  }
+  .amount-custom span{font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--ink);}
+  .amount-custom input{
+    width:88px; border:none; background:transparent; font-family:'IBM Plex Mono',monospace; font-size:13px;
+    padding:9px 8px 9px 0; color:var(--ink); outline:none;
+  }
+  .amount-custom input::placeholder{color:#a39c86;}
+  .amount-custom.active{border-color:var(--crimson-dark);}
+  .cal-picker .give-note{font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#6b6350; margin-top:12px; line-height:1.55;}
+  .cal-foot-note{font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#6b6350; margin-top:16px; line-height:1.55;}
+
+  footer{border-top:2px solid var(--ink); background:var(--paper);}
+  footer .wrap{padding:36px 24px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px; align-items:center;}
+  footer h4{font-family:'Oswald',sans-serif; font-size:14px; letter-spacing:0.04em; margin:0 0 4px;}
+  footer p{margin:2px 0; font-size:13px; color:#4a4437;}
+  footer a{color:var(--crimson-dark);}
+  .foot-social{display:flex; gap:12px;}
+  .foot-social a{
+    width:38px; height:38px; border:1.5px solid var(--ink); display:flex; align-items:center; justify-content:center;
+    text-decoration:none; color:var(--ink); font-family:'Oswald',sans-serif; font-size:11px;
+  }
+  .copyright{text-align:center; font-family:'IBM Plex Mono',monospace; font-size:11px; color:#8a8265; padding:14px 0 26px;}
+
+  .reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:none;}
+
+ /* Container styling */
+.reel-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 1rem;
+}
+
+.section-head {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.section-head h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.section-head .tag {
+  display: inline-block;
+  font-size: 0.95rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* 3x3 Grid */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns on desktop */
+  gap: 1.5rem;
+}
+
+/* Video Card Container */
+.video-card {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.video-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* 16:9 Responsive Video Aspect Ratio */
+.video-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #000;
+}
+
+.video-frame iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Card Information */
+.video-info {
+  padding: 1rem;
+}
+
+.video-info h3 {
+  font-size: 1.05rem;
+  margin: 0 0 0.35rem 0;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.video-info p {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 992px) {
+  .video-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
+  }
+}
+
+@media (max-width: 600px) {
+  .video-grid {
+    grid-template-columns: 1fr; /* Single column on phones */
+  }
+}
+ 
+</style>
+</head>
+<body>
+
+<div class="topline">
+  <div class="wrap">
+    <div class="brandmark">
+      <img src="signature-navy.png" alt="" class="sig-mini">
+      <span class="num">#8</span>
+      <span class="name">Avery Satchell</span>
+    </div>
+    <nav class="toplinks">
+      <a href="#stats">Stats</a>
+      <a href="#profile">Profile</a>
+      <a href="#defense">Defense</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#reel">Reel</a>
+      <a href="sponsor.html">Support</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="hero-grid">
+    <div class="hero-photo">
+      <img src="avery-action.png" alt="Avery Satchell, #8, batting stance in white and crimson uniform">
+    </div>
+    <div class="hero-copy">
+      <div class="eyebrow">Class of 2030 &middot; Langham Creek High School</div>
+      <div class="name-block">
+        <img src="signature.png" alt="" class="sig-watermark">
+        <h1>Avery<br>Satchell</h1>
+        <div class="sub">#8 &nbsp;&middot;&nbsp; 3B / CF / LF &nbsp;&middot;&nbsp; Houston, TX</div>
+      </div>
+      <p class="lede">A run-producing hitter with rare plate discipline &mdash; a .540 career average and a 1.589 OPS across two travel seasons, anchored by a versatile glove across five positions.</p>
+      <div class="cta-row">
+        <a href="#reel" class="btn btn-primary">Watch the Reel</a>
+        <a href="#sponsor" class="btn btn-outline">Sponsor Avery</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="facts">
+  <div class="wrap">
+    <div class="fact"><div class="k">Height</div><div class="v">5&#39;10&quot;</div></div>
+    <div class="fact"><div class="k">Bats / Throws</div><div class="v">R / R</div></div>
+    <div class="fact"><div class="k">Primary Pos</div><div class="v">CF / 3B / LF</div></div>
+    <div class="fact"><div class="k">Travel Club</div><div class="v">Blaze</div></div>
+    <div class="fact"><div class="k">Head Coach</div><div class="v">Reginald Lewis</div></div>
+    <div class="fact"><div class="k">Hometown</div><div class="v">Houston, TX</div></div>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <section id="stats">
+    <div class="section-head">
+      <h2>Career Snapshot</h2>
+      <span class="tag">136 GP &middot; 2024&ndash;2025</span>
+    </div>
+    <div class="stat-grid reveal">
+      <button type="button" class="stat-cell" data-metric="avg" data-label="Batting Average" data-unit="" data-decimals="3" data-leadzero="false"
+        data-values='[["Spring 2024","0.624"],["Fall 2024 (12U)","0.436"],["Fall 2024 (14U)","0.538"],["Spring 2025","0.492"],["Career","0.540"]]'>
+        <div class="num">.540</div><div class="lbl">Career AVG</div><div class="tap-hint">Tap for season splits</div>
+      </button>
+      <button type="button" class="stat-cell" data-metric="obp" data-label="On-Base Percentage" data-unit="" data-decimals="3" data-leadzero="false"
+        data-values='[["Spring 2024","0.714"],["Fall 2024 (12U)","0.593"],["Fall 2024 (14U)","0.571"],["Spring 2025","0.673"],["Career","0.669"]]'>
+        <div class="num">.669</div><div class="lbl">Career OBP</div><div class="tap-hint">Tap for season splits</div>
+      </button>
+      <button type="button" class="stat-cell" data-metric="ops" data-label="On-Base Plus Slugging" data-unit="" data-decimals="3" data-leadzero="true"
+        data-values='[["Spring 2024","1.726"],["Fall 2024 (12U)","1.208"],["Fall 2024 (14U)","1.495"],["Spring 2025","1.657"],["Career","1.589"]]'>
+        <div class="num">1.589</div><div class="lbl">Career OPS</div><div class="tap-hint">Tap for season splits</div>
+      </button>
+      <button type="button" class="stat-cell" data-metric="bbk" data-label="Walk-to-Strikeout Ratio" data-unit="" data-decimals="2" data-leadzero="true"
+        data-values='[["Spring 2024","2.33"],["Fall 2024 (12U)","0.75"],["Fall 2024 (14U)","0.25"],["Spring 2025","3.33"],["Career","1.68"]]'>
+        <div class="num">1.68</div><div class="lbl">BB&thinsp;/&thinsp;K Ratio</div><div class="tap-hint">Tap for season splits</div>
+      </button>
+      <button type="button" class="stat-cell" data-metric="rbi" data-label="Runs Batted In" data-unit="" data-decimals="0" data-leadzero="true"
+        data-values='[["Spring 2024","49"],["Fall 2024 (12U)","7"],["Fall 2024 (14U)","5"],["Spring 2025","41"],["Career","102"]]'>
+        <div class="num">102</div><div class="lbl">Career RBI</div><div class="tap-hint">Tap for season splits</div>
+      </button>
+      <button type="button" class="stat-cell" data-metric="r" data-label="Runs Scored" data-unit="" data-decimals="0" data-leadzero="true"
+        data-values='[["Spring 2024","51"],["Fall 2024 (12U)","20"],["Fall 2024 (14U)","6"],["Spring 2025","48"],["Career","125"]]'>
+        <div class="num">125</div><div class="lbl">Runs Scored</div><div class="tap-hint">Tap for season splits</div>
+      </button>
+      <button type="button" class="stat-cell" data-metric="xbh" data-label="Extra-Base Hits (2B + 3B + HR)" data-unit="" data-decimals="0" data-leadzero="true"
+        data-values='[["Spring 2024","17"],["Fall 2024 (12U)","5"],["Fall 2024 (14U)","3"],["Spring 2025","15"],["Career","40"]]'>
+        <div class="num">40</div><div class="lbl">Extra-Base Hits</div><div class="tap-hint">Tap for season splits</div>
+      </button>
+      <button type="button" class="stat-cell" data-metric="sb" data-label="Stolen Base %" data-unit="%" data-decimals="1" data-leadzero="true"
+        data-values='[["Spring 2024","91.3"],["Fall 2024 (12U)","78.6"],["Fall 2024 (14U)","100"],["Spring 2025","93.8"],["Career","89.1"]]'>
+        <div class="num">89.1%</div><div class="lbl">Stolen Base %</div><div class="tap-hint">Tap for season splits</div>
+      </button>
+    </div>
+
+    <div class="stat-breakdown" id="statBreakdown">
+      <div class="stat-breakdown-inner">
+        <div class="stat-breakdown-head">
+          <span class="metric-name" id="breakdownTitle">&mdash;</span>
+          <button type="button" class="metric-close" id="breakdownClose">Close &times;</button>
+        </div>
+        <div class="breakdown-rows" id="breakdownRows"></div>
+        <div class="breakdown-foot" id="breakdownFoot"></div>
+      </div>
+    </div>
+    <div class="stat-note">227 runs directly produced (125 R + 102 RBI) &middot; 37.0% XBH rate</div>
+  </section>
+
+  <section id="profile">
+    <div class="section-head">
+      <h2>Scouting Report</h2>
+      <span class="tag">Offense &middot; Discipline</span>
+    </div>
+    <div class="narrative">
+      <div class="block">
+        <h3>Progression, 2024&ndash;2025</h3>
+        <p>Avery's bat has translated across age groups and seasons. She opened <strong>Spring 2024</strong> hitting <strong>.624</strong> with a <strong>.714 OBP</strong> across 56 games, then spent <strong>Fall 2024</strong> playing up a division &mdash; hitting .538 with a .923 slugging percentage in 14U play under Coach Tracy Bougere while still anchoring her 12U roster. By <strong>Spring 2025</strong> she was slugging <strong>.984</strong> with 6 home runs in just 46 games.</p>
+      </div>
+      <div class="block">
+        <h3>Power &amp; Run Production</h3>
+        <p>Of her 108 career hits, <strong>40 went for extra bases</strong> &mdash; 16 doubles, 12 triples, 12 home runs. Her at-bats-per-home-run ratio dropped to a blistering <strong>10.5</strong> in Spring 2025, and she drove in a run roughly every 1.5 at-bats that same season (41 RBI in 46 games).</p>
+      </div>
+      <div class="block">
+        <h3>Plate Discipline</h3>
+        <p>64 career walks against 38 strikeouts, with a walk-to-strikeout ratio that climbed from 0.75 in Fall 2024 to an elite <strong>3.33</strong> by Spring 2025 &mdash; a 344% swing in plate-discipline efficiency in a single year. Her OBP has never dropped below .571 in any season.</p>
+      </div>
+      <div class="block">
+        <h3>Makeup</h3>
+        <p>A 5&#39;10&quot; righty who influences the game on both sides of the ball &mdash; a dominant batter willing to play every position except pitcher and catcher to help the team win.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="season-table">
+    <div class="section-head">
+      <h2>Season-by-Season</h2>
+      <span class="tag">GameChanger Verified</span>
+    </div>
+    <div class="card-frame">
+      <div class="card-title"><span>College Recruiting Line</span><span>2024&ndash;2025</span></div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Season / Division</th><th>GP</th><th>AVG</th><th>OBP</th><th>SLG</th><th>OPS</th>
+              <th>H</th><th>HR</th><th>RBI</th><th>R</th><th>BB</th><th>SO</th><th>SB</th><th>SB%</th><th>Pos</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Spring 2024 (12U)</td><td>56</td><td class="hl">.624</td><td>.714</td><td>1.012</td><td>1.726</td>
+              <td>53</td><td>4</td><td>49</td><td>51</td><td>21</td><td>9</td><td>21</td><td>91.3%</td><td>Util / OF</td>
+            </tr>
+            <tr>
+              <td>Fall 2024 (12U)</td><td>27</td><td class="hl">.436</td><td>.593</td><td>.615</td><td>1.208</td>
+              <td>17</td><td>1</td><td>7</td><td>20</td><td>12</td><td>16</td><td>11</td><td>78.6%</td><td>CF / 3B</td>
+            </tr>
+            <tr>
+              <td>Fall 2024 (14U, played up)</td><td>7</td><td class="hl">.538</td><td>.571</td><td>.923</td><td>1.495</td>
+              <td>7</td><td>1</td><td>5</td><td>6</td><td>1</td><td>4</td><td>2</td><td>100%</td><td>3B / 1B</td>
+            </tr>
+            <tr>
+              <td>Spring 2025 (12U)</td><td>46</td><td class="hl">.492</td><td>.673</td><td>.984</td><td>1.657</td>
+              <td>31</td><td>6</td><td>41</td><td>48</td><td>30</td><td>9</td><td>15</td><td>93.8%</td><td>CF / LF / 3B</td>
+            </tr>
+            <tr class="total">
+              <td>Career Totals</td><td>136</td><td>.540</td><td>.669</td><td>.920</td><td>1.589</td>
+              <td>108</td><td>12</td><td>102</td><td>125</td><td>64</td><td>38</td><td>49</td><td>89.1%</td><td>CF / 3B / LF</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="src-note">Compiled from GameChanger team data, Spring &amp; Fall seasons 2024&ndash;2025. Fielding: .730 career fielding percentage.</div>
+    </div>
+  </section>
+
+  <section id="defense">
+    <div class="section-head">
+      <h2>Defensive Versatility</h2>
+      <span class="tag">166 Innings Logged &middot; 5 Positions</span>
+    </div>
+    <div class="pos-grid">
+      <div class="pos-card">
+        <span class="tag">CF</span>
+        <div class="innings">116.0 <span>career innings</span></div>
+        <p>Primary center fielder &mdash; 93.0 innings came in Spring 2025 alone. Range and closing speed make her a premier defensive asset up the middle.</p>
+      </div>
+      <div class="pos-card">
+        <span class="tag">3B</span>
+        <div class="innings">30.1 <span>career innings</span></div>
+        <p>Held the hot corner with 15.1 innings in Fall 2024 14U play &mdash; quick reflexes and a strong throwing arm on the infield dirt.</p>
+      </div>
+      <div class="pos-card">
+        <span class="tag">LF</span>
+        <div class="innings">17.0 <span>innings, Spring &#39;25</span></div>
+        <p>Deployed in left to support specific matchups, plus additional appearances at 1B and RF to close out games defensively.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="schedule">
+    <div class="section-head">
+      <h2>Tournament Schedule</h2>
+      <span class="tag">Fall 2026 &middot; Subject to Change</span>
+    </div>
+    <div class="card-frame">
+      <div class="card-title"><span>2026 Fall Slate</span><span>10 Events</span></div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Event</th><th>Dates</th><th>Location</th><th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="scheduleBody">
+            <tr data-start="2026-09-11" data-end="2026-09-13">
+              <td>Warmup</td><td>Sep 11&ndash;13, 2026</td><td>Location TBD</td>
+              <td><span class="status-pill confirmed">Scheduled</span></td>
+            </tr>
+            <tr data-start="2026-09-18" data-end="2026-09-20">
+              <td>Diamond Legacy</td><td>Sep 18&ndash;20, 2026</td><td>Broussard, LA</td>
+              <td><span class="status-pill confirmed">Locked</span></td>
+            </tr>
+            <tr data-start="2026-09-26" data-end="2026-09-27">
+              <td>Space City Warm-up</td><td>Sep 26&ndash;27, 2026</td><td>Houston, TX</td>
+              <td><span class="status-pill">Tentative</span></td>
+            </tr>
+            <tr data-start="2026-10-02" data-end="2026-10-04">
+              <td>Pink Out the Park</td><td>Oct 2&ndash;4, 2026</td><td>Willis, TX</td>
+              <td><span class="status-pill">Tentative</span></td>
+            </tr>
+            <tr data-start="2026-10-16" data-end="2026-10-18">
+              <td>TCS Ronald McDonald (Weekend 1)</td><td>Oct 16&ndash;18, 2026</td><td>Houston, TX</td>
+              <td><span class="status-pill">Tentative</span></td>
+            </tr>
+            <tr data-start="2026-10-23" data-end="2026-10-25">
+              <td>TCS Ronald McDonald (Weekend 2)</td><td>Oct 23&ndash;25, 2026</td><td>Houston, TX</td>
+              <td><span class="status-pill">Tentative</span></td>
+            </tr>
+            <tr data-start="2026-10-30" data-end="2026-11-01">
+              <td>Fall State</td><td>Oct 30 &ndash; Nov 1, 2026</td><td>Houston, TX</td>
+              <td><span class="status-pill">Tentative</span></td>
+            </tr>
+            <tr data-start="2026-11-13" data-end="2026-11-15">
+              <td>PGF</td><td>Nov 13&ndash;15, 2026</td><td>Katy, TX</td>
+              <td><span class="status-pill">Tentative</span></td>
+            </tr>
+            <tr data-start="2026-11-21" data-end="2026-11-23">
+              <td>TFL Fall Championships</td><td>Nov 21&ndash;23, 2026</td><td>Houston, TX</td>
+              <td><span class="status-pill">Tentative</span></td>  <!--<td class="dash">&mdash;</td>-->
+            </tr>
+            <tr data-start="2026-12-05" data-end="2026-12-07">
+              <td>Stars Over Texas</td><td>Dec 5&ndash;7, 2026</td><td>Pearland, TX</td>
+              <td><span class="status-pill">Tentative</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="src-note">Dates and venues marked Tentative are subject to change pending final tournament confirmation.</div>
+    </div>
+  </section>
+
+ <section id="reel" class="reel-section">
+  <div class="section-head">
+    <h2>Recruiting Reels</h2>
+    <span class="tag">Full Swings &middot; Fielding &middot; Baserunning &middot; Live At-Bats</span>
+  </div>
+
+  <div class="video-grid">
+    
+    <div class="video-card">
+      <div class="video-frame">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID_1" title="Game Swings & At-Bats" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <h3>Game Swings &amp; Contact</h3>
+        <p>In-game highlights &amp; pitch selection</p>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="video-frame">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID_2" title="Tee & Front Toss Mechanics" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <h3>Bat Speed &amp; Mechanics</h3>
+        <p>Cage work, tee drills &amp; launch angles</p>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="video-frame">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID_3" title="Power / Extra-Base Hits" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <h3>Extra-Base Hits</h3>
+        <p>Gap-to-gap power &amp; driving runners</p>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="video-frame">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID_4" title="Infield Footwork & Range" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <h3>Infield Range &amp; Lateral Quickness</h3>
+        <p>Glove work, backhands &amp; charging</p>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="video-frame">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID_5" title="Throwing Mechanics & Velocity" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <h3>Arm Strength &amp; Transfer Speed</h3>
+        <p>Deep throws across diamond &amp; release</p>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="video-frame">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID_6" title="Live Game Defensive Plays" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <h3>Defensive Game Highlights</h3>
+        <p>Double plays, cutoffs &amp; situational play</p>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="video-frame">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID_7" title="Home to 1st & Sprint Speed" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <h3>Home-to-1st &amp; Acceleration</h3>
+        <p>Timed speed, turn mechanics &amp; foot speed</p>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="video-frame">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID_8" title="Base Stealing & Aggressiveness" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <h3>Baserunning &amp; Steals</h3>
+        <p>Jumps, sliding technique &amp; reading dirt balls</p>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="video-frame">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID_9" title="Full Uncut Showcase Reel" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <h3>Full Comprehensive Showcase</h3>
+        <p>Uncut full-skill showcase reel</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+
+<footer>
+  <div class="wrap">
+    <div>
+      <h4>Recruiting &amp; Scout Inquiries</h4>
+      <p>
+  <strong>Current Coach:</strong> Reggie Lewis &middot; Texas Blaze Premier National &mdash; 
+  <a href="tel:5046164551">tel: 504-616-4551</a>
+</p>
+<p>
+  <strong>Former Coach:</strong> Tracy Bougere &middot; Marucci Elite Texas &mdash; 
+  <a href="tel:2816696445">tel: 281-669-6445</a></p>
+<p>Email: <a href="mailto:averysatchell784@gmail.com">averysatchell784@gmail.com</a></p>
+    </div>
+    <div class="foot-social">
+      <a href="https://www.instagram.com/avery_18satchell/" aria-label="Instagram">IG</a>
+      <a href="mailto:averysatchell784@gmail.com" aria-label="Email">@</a>
+    </div>
+  </div>
+  <div class="copyright">&copy; 2026 Avery Satchell #8 &middot; Class of 2030 Recruiting Profile</div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
+  }, {threshold:0.2});
+  els.forEach(el=>io.observe(el));
+</script>
+
+<script>
+  (function(){
+    const cells = document.querySelectorAll('.stat-cell');
+    const panel = document.getElementById('statBreakdown');
+    const title = document.getElementById('breakdownTitle');
+    const rowsEl = document.getElementById('breakdownRows');
+    const footEl = document.getElementById('breakdownFoot');
+    const closeBtn = document.getElementById('breakdownClose');
+    let activeCell = null;
+
+    function fmt(raw, decimals, unit, leadzero){
+      let n = parseFloat(raw);
+      let out = n.toFixed(decimals);
+      if(!leadzero && out.startsWith('0.')) out = out.slice(1);
+      return out + unit;
+    }
+
+    function closePanel(){
+      panel.classList.remove('open');
+      if(activeCell){ activeCell.classList.remove('active'); activeCell = null; }
+    }
+
+    function openPanel(cell){
+      if(activeCell === cell){ closePanel(); return; }
+      if(activeCell) activeCell.classList.remove('active');
+      activeCell = cell;
+      cell.classList.add('active');
+
+      const label = cell.dataset.label;
+      const unit = cell.dataset.unit || '';
+      const decimals = parseInt(cell.dataset.decimals || '0', 10);
+      const leadzero = cell.dataset.leadzero !== 'false';
+      const data = JSON.parse(cell.dataset.values);
+
+      title.textContent = label;
+
+      const vals = data.map(d => parseFloat(d[1]));
+      const maxVal = Math.max(...vals) || 1;
+
+      rowsEl.innerHTML = '';
+      data.forEach(([season, raw])=>{
+        const v = parseFloat(raw);
+        const pct = Math.max(4, (v / maxVal) * 100);
+        const isCareer = /career/i.test(season);
+        const row = document.createElement('div');
+        row.className = 'breakdown-row' + (isCareer ? ' is-career' : '');
+        row.innerHTML =
+          '<span class="season">' + season + '</span>' +
+          '<span class="bar-track"><span class="bar-fill" style="width:0%"></span></span>' +
+          '<span class="val">' + fmt(raw, decimals, unit, leadzero) + '</span>';
+        rowsEl.appendChild(row);
+        const fillEl = row.querySelector('.bar-fill');
+        requestAnimationFrame(()=>{
+          requestAnimationFrame(()=>{ fillEl.style.width = pct + '%'; });
+        });
+      });
+
+      footEl.textContent = 'Season-level splits from official GameChanger team exports (no individual per-game log available). Career figure is the full 2024\u20132025 total, not a sum of the seasons shown.';
+
+      panel.classList.add('open');
+      panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+    }
+
+    cells.forEach(cell=>{
+      cell.addEventListener('click', ()=>openPanel(cell));
+    });
+    closeBtn.addEventListener('click', closePanel);
+  })();
+</script>
+
+<script>
+  (function(){
+    const rows = Array.from(document.querySelectorAll('#scheduleBody tr[data-start]'));
+    if(!rows.length) return;
+
+    const today = new Date();
+    today.setHours(0,0,0,0);
+
+    // upcoming = event hasn't finished yet (end date is today or later)
+    const upcoming = rows
+      .map(row => ({ row, end: new Date(row.dataset.end + 'T00:00:00') }))
+      .filter(r => r.end >= today)
+      .sort((a,b) => a.end - b.end);
+
+    if(upcoming.length){
+      upcoming[0].row.classList.add('next-event');
+    }
+  })();
+</script>
+
+<script type="module" src="sponsor-calendar.js"></script>
+
+</body>
+</html>
